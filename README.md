@@ -12,7 +12,7 @@ I created this cuz I want to exclude node_modules folders in Google Drive
 
 ## Installation
 
--    [Download executable]()
+-    [Download executable](https://github.com/AzPepoze/Node_modules_Symlinker/releases)
 
 ## Usage (Command-Line)
 
