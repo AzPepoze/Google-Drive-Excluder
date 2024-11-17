@@ -1,0 +1,23 @@
+{
+	"name": "Node_modules_Symlinker",
+	"version": "1.0.0",
+	"description": "Node_modules_Symlinker is a tool to recursively find node_modules folders and symlink to another folders.",
+	"main": "Run.js",
+	"scripts": {
+		"Build": "pkg ./Run.js --output dist/Node_modules_Symlinker.exe --targets latest-win-x64",
+		"Run": "node ./Run.js"
+	},
+	"keywords": [
+		"node_modules",
+		"symlink",
+		"symlinker",
+		"google drive"
+	],
+	"author": "AzPepoze",
+	"license": "MIT",
+	"dependencies": {
+		"chokidar": "^4.0.1",
+		"fs-extra": "^11.2.0",
+		"path": "^0.12.7"
+	}
+}
