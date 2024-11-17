@@ -4,8 +4,8 @@
 	"description": "Node_modules_Symlinker is a tool to recursively find node_modules folders and symlink to another folders.",
 	"main": "Run.js",
 	"scripts": {
-		"Build": "pkg ./Run.js --output dist/Node_modules_Symlinker.exe --targets latest-win-x64",
-		"Run": "node ./Run.js"
+		"Build": "pkg src/Run.js --output build/Node_modules_Symlinker.exe --targets latest-win-x64 && node Edit_exe.js",
+		"Run": "node src/Run.js"
 	},
 	"keywords": [
 		"node_modules",
@@ -19,5 +19,8 @@
 		"chokidar": "^4.0.1",
 		"fs-extra": "^11.2.0",
 		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"resedit": "^2.0.3"
 	}
 }

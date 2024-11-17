@@ -59,7 +59,6 @@ function Node_modules_Symlinker(inputDir, outputDir) {
 		.on("error", (error) => console.error(`Watcher error: ${error}`));
 }
 
-// Parse arguments
 const args = process.argv.slice(2);
 
 if (args.length < 2) {
@@ -72,7 +71,6 @@ const outputDir = path.resolve(args[1]);
 
 try {
 	Node_modules_Symlinker(inputDir, outputDir);
-	console.log("All node_modules symlinks created successfully. Watching for new changes...");
 } catch (error) {
 	console.error("Error creating symlinks:", error);
 }
