@@ -12,7 +12,7 @@ I created this cuz I want to exclude node_modules folders in Google Drive (Mirro
 
 ## Installation
 
--    [Download](https://github.com/AzPepoze/Google_Drive_Excluder/releases)
+-    [Download](https://github.com/AzPepoze/Google-Drive-Excluder/releases)
 -    Extract zip file
 
 ## Usage
