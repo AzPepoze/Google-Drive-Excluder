@@ -5,8 +5,8 @@ const util = require("util");
 const renameFile = util.promisify(fs.rename);
 const unlinkFile = util.promisify(fs.unlink);
 
-const Input = "./build/Node_modules_Symlinker.exe";
-const Output = "./dist/Node_modules_Symlinker.exe";
+const Input = "./build/Google_Drive_Excluder.exe";
+const Output = "./dist/Google_Drive_Excluder.exe";
 
 load().then(async (ResEdit) => {
 	try {
@@ -36,8 +36,8 @@ load().then(async (ResEdit) => {
 			{ lang: 1033, codepage: 1200 },
 			{
 				FileVersion: "1.0.0",
-				FileDescription: "Node_modules_Symlinker",
-				ProductName: "Node_modules_Symlinker",
+				FileDescription: "Google_Drive_Excluder",
+				ProductName: "Google_Drive_Excluder",
 			}
 		);
 		vi.outputToResourceEntries(res.entries);

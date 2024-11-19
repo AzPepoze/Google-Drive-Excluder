@@ -1,27 +1,42 @@
-# Node_modules_Symlinker
+# Google Drive Excluder
 
 ## Overview
 
-`Node_modules_Symlinker` is a tool to recursively find `node_modules` folders and symlink to another folders.
+`Google Drive Excluder` is a tool to recursively find `folders that match the pattern` and symlink to another folders.
 
-I created this cuz I want to exclude node_modules folders in Google Drive
+I created this cuz I want to exclude node_modules folders in Google Drive (Mirror mode only)
 
 ## Features
 
--    Auto link if you created new `node_modules` folder
+-    Auto link if you created new folder
 
 ## Installation
 
--    [Download executable](https://github.com/AzPepoze/Node_modules_Symlinker/releases)
+-    [Download](https://github.com/AzPepoze/Google_Drive_Excluder/releases)
+-    Extract zip file
 
-## Usage (Command-Line)
+## Usage
+
+-    Edit the `Run.bat` as you want.
+
+### Format
 
 ```
-Node_modules_Symlinker.exe <inputDir> <outputDir>
+Google_Drive_Excluder.exe <inputDir> <outputDir> <patterns>
 ```
 
-### Example:
+### Example < patterns >
+
+`"**/node_modules"` folder that named "node_modules"
+
+`"**/node_modules|**/otherfolder"` folder that named "node_modules" and "otherfolder"
+
+`"**/src/**/some_folder"` folder that named "some_folder" anywhere in "src"
+
+### Example
 
 ```
-Node_modules_Symlinker.exe "C:/Google_Drive" "C:/node_modules_storage"
+Google_Drive_Excluder.exe "C:/Google_Drive" "C:/node_modules_storage" "node_modules"
 ```
+
+-    Run `Run.bat` or `Run (No console).vbs` (I recommand to use `Run.bat` for the first time to see any typo/bug)

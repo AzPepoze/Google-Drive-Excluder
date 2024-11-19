@@ -1,14 +1,16 @@
 const fs = require("fs-extra");
 const path = require("path");
 const chokidar = require("chokidar");
+const micromatch = require("micromatch");
 
 /**
- * Recursively find and symlink all "node_modules" folders from inputDir to outputDir.
- * @param {string} inputDir - The directory to search for "node_modules".
+ * Recursively find and symlink all matched folders from inputDir to outputDir.
+ * @param {string} inputDir - The directory to search for matching folders.
  * @param {string} outputDir - The directory where symlinks will be created.
+ * @param {string[]} patterns - Glob patterns to match folder names.
  */
-function Node_modules_Symlinker(inputDir, outputDir) {
-	const handleNodeModules = (inputPath, outputPath) => {
+function FolderSymlinker(inputDir, outputDir, patterns) {
+	const handleFolder = (inputPath, outputPath) => {
 		console.log(`---------------------`);
 		console.log("From", inputPath);
 		console.log("To", outputPath);
@@ -42,35 +44,42 @@ function Node_modules_Symlinker(inputDir, outputDir) {
 
 	// Watch for changes
 	const watcher = chokidar.watch(inputDir, {
-		ignored: /(^|[\/\\])\../, // Ignore dotfiles
+		ignored: /(^|[\/\\])\../,
 		persistent: true,
-		depth: 3, // Adjust as needed to limit watching depth
+		depth: 3,
 	});
 
 	watcher
 		.on("addDir", (dirPath) => {
-			if (path.basename(dirPath) === "node_modules") {
-				const relativePath = path.relative(inputDir, dirPath);
+			const relativePath = path.relative(inputDir, dirPath);
+			if (micromatch.isMatch(relativePath, patterns)) {
 				const outputPath = path.join(outputDir, relativePath);
-
-				handleNodeModules(dirPath, outputPath);
+				handleFolder(dirPath, outputPath);
 			}
+			// else {
+			// 	console.log(`Ignoring folder: ${relativePath}`);
+			// }
 		})
 		.on("error", (error) => console.error(`Watcher error: ${error}`));
 }
 
 const args = process.argv.slice(2);
 
-if (args.length < 2) {
-	console.error("Usage: <exe> <inputDir> <outputDir>");
+if (args.length < 3) {
+	console.error("Usage: Google_Drive_Excluder.exe <inputDir> <outputDir> <patterns>");
+	console.error(
+		'Example patterns: "**/node_modules", "**/node_modules | **/otherfolder", "**/src/**/node_modules"'
+	);
 	process.exit(1);
 }
 
 const inputDir = path.resolve(args[0]);
 const outputDir = path.resolve(args[1]);
+const patterns = args[2].split("|").map((p) => p.trim());
 
 try {
-	Node_modules_Symlinker(inputDir, outputDir);
+	console.log(inputDir, outputDir, patterns);
+	FolderSymlinker(inputDir, outputDir, patterns);
 } catch (error) {
 	console.error("Error creating symlinks:", error);
 }
