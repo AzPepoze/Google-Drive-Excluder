@@ -3,6 +3,21 @@ const path = require("path");
 const chokidar = require("chokidar");
 const micromatch = require("micromatch");
 
+async function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function Create_Symlink(inputPath, outputPath) {
+	try {
+		await fs.symlink(outputPath, inputPath, "dir");
+		console.log(`Symlink created: ${inputPath} -> ${outputPath}`);
+	} catch (error) {
+		console.error("Error creating symlink:", error, "trying again!");
+		await sleep(1000);
+		await Create_Symlink(inputPath, outputPath);
+	}
+}
+
 /**
  * Recursively find and symlink all matched folders from inputDir to outputDir.
  * @param {string} inputDir - The directory to search for matching folders.
@@ -10,7 +25,7 @@ const micromatch = require("micromatch");
  * @param {string[]} patterns - Glob patterns to match folder names.
  */
 function FolderSymlinker(inputDir, outputDir, patterns) {
-	const handleFolder = (inputPath, outputPath) => {
+	const handleFolder = async (inputPath, outputPath) => {
 		console.log(`---------------------`);
 		console.log("From", inputPath);
 		console.log("To", outputPath);
@@ -32,12 +47,7 @@ function FolderSymlinker(inputDir, outputDir, patterns) {
 
 		console.log(`Symlinking : ${inputPath} to ${outputPath}`);
 
-		try {
-			fs.symlinkSync(outputPath, inputPath, "dir");
-			console.log(`Symlink created: ${inputPath} -> ${outputPath}`);
-		} catch (error) {
-			console.error("Error creating symlink:", error);
-		}
+		await Create_Symlink(inputPath, outputPath);
 
 		console.log(`------------------------\n\n`);
 	};
