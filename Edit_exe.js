@@ -6,7 +6,7 @@ const renameFile = util.promisify(fs.rename);
 const unlinkFile = util.promisify(fs.unlink);
 
 const Input = "./build/Google_Drive_Excluder.exe";
-const Output = "./dist/Google_Drive_Excluder.exe";
+const Output = "./usable/Google_Drive_Excluder.exe";
 
 load().then(async (ResEdit) => {
 	try {

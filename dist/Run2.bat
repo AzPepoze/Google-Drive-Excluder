@@ -1,1 +1,0 @@
-Google_Drive_Excluder.exe "C:/Az_Google_Drive" "C:/node_modules_storage" "**/node_modules"
