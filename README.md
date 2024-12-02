@@ -36,7 +36,7 @@ Google_Drive_Excluder.exe <inputDir> <outputDir> <patterns>
 ### Example
 
 ```
-Google_Drive_Excluder.exe "C:/Google_Drive" "C:/node_modules_storage" "node_modules"
+Google_Drive_Excluder.exe "C:/Google_Drive" "C:/node_modules_storage" ""**/node_modules"
 ```
 
 -    Run `Run.bat` or `Run (No console).vbs` (I recommand to use `Run.bat` for the first time to see any typo/bug)
